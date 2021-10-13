@@ -14,10 +14,13 @@ public class Info :  Remodeling
     public Text price;
     string btnName;
 
+    string temp;
+
 public void ClickBtn()
     {
         GameObject clickObject = EventSystem.current.currentSelectedGameObject;
         btnName = clickObject.name;
+
     }
 
     // Update is called once per frame
@@ -27,22 +30,26 @@ public void ClickBtn()
             {
                 //===========안구==========//
                 case "Module1":
-                    nametext.text = "정보 수치화 모듈";
+                rebutton.onClick.AddListener(IQM);
+                nametext.text = "정보 수치화 모듈";
                     infotext.text = "전투 시 적의 다음 행동을 수치화하여 볼 수 있다.";
-                if (useIQM == true)
-                {
-                    btntext.text = "개조하기( 1 / 1 )";
-                    Debug.Log("AAA");
-                }
-                else btntext.text = "개조하기( 0 / 1 )";
+                temp = btnName;
+                rebutton.name = temp;
+                temp = null;
+                    if (useIQM == true)
+                    {
+                        btntext.text = "개조하기( 1 / 1 )";
+                    }
+                    else if (useIQM == false) { btntext.text = "개조하기( 0 / 1 )"; Debug.Log(useIQM); }
                     price.text = "1000000";
                     Debug.Log("Module1");
-                    rebutton.onClick.AddListener(IQM);
-
                     break;
 
                 case "Module2":
-                    nametext.text = "탐색 모듈";
+                temp = btnName;
+                rebutton.name = temp;
+                temp = null;
+                nametext.text = "탐색 모듈";
                     infotext.text = "적의 상세한 스테이터스를 볼 수 있다.";
                     btntext.text = "개조하기( 1 / 1 )";
                     price.text = "1000000";
@@ -52,7 +59,10 @@ public void ClickBtn()
                 break;
 
                 case "Module3":
-                    nametext.text = "해킹 모듈";
+                temp = btnName;
+                rebutton.name = temp;
+                temp = null;
+                nametext.text = "해킹 모듈";
                     infotext.text = "전투에서 승리할 경우, 적의 시체에서 더 많은 현금을 찾아낸다.";
                     btntext.text = "개조하기( 1 / 1 )";
                     price.text = "1000000";

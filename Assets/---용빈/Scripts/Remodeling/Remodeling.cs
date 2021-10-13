@@ -50,8 +50,10 @@ public class Remodeling : Stat
 
             Debug.Log(_money);
             Debug.Log(useIQM);
+
+          
         }
-        
+       
 
     }
 
