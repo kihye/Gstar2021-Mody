@@ -34,7 +34,12 @@ public class System_BattleManager : MonoBehaviour
     {
         sDict = GameObject.Find("SkillDictionary").GetComponent<System_SkillDictionary>();
         enemyCount = 3;
-        pData = new Player_BattleData();
+        pData = new Player_BattleData(
+             System_MainDataManager.mainData.maxHp,
+             System_MainDataManager.mainData.curHp,
+             System_MainDataManager.mainData.atkPoint,
+             System_MainDataManager.mainData.defPoint
+            );
         for(int i = 0; i < enemyCount; i++)
         {
             eData[i] = new Enemy_BattleData();

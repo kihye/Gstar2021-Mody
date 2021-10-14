@@ -7,22 +7,43 @@ using TMPro;
 public class DataInfo
 {
     public string name;
-    public int money;
-    public int debt;
 
-    public DataInfo(string _name, int _money, int _dept)
+    public int maxHp;
+    public int curHp;
+
+    public int atkPoint;
+    public int defPoint;
+
+    public int playerMoney;
+    public Stack<Node> nodeData = new Stack<Node>();
+
+    public Vector3 playerPos;
+
+    public DataInfo(System_MainDataManager dm)
     {
-        name = _name;
-        money = _money;
-        debt = _dept;
+        DataRenew(dm);
+    }
+    public void DataRenew(System_MainDataManager dm)
+    {
+        name = dm.name;
+
+        maxHp = dm.maxHp;
+        curHp = dm.curHp;
+
+        atkPoint = dm.atkPoint;
+        defPoint = dm.defPoint;
+
+        playerMoney = dm.playerMoney;
+        nodeData = dm.nodeData;
+        playerPos = dm.playerPos;
     }
 }
 
 public class SLManager : MonoBehaviour
 {
     public static SLManager instance;
-
-    DataInfo data = new DataInfo("디폴트", 0, 0);
+    DataInfo data;
+    //DataInfo data = new DataInfo(System_MainDataManager.mainData);
 
     void Awake()
     {
@@ -37,12 +58,9 @@ public class SLManager : MonoBehaviour
         }
     }
 
+    
     public void SaveData(DataInfo _data)
     {
-        data.name = _data.name;
-        data.money = _data.money;
-        data.debt = _data.debt;
-
         string jsonData = JsonUtility.ToJson(data);
 
         File.WriteAllText(Application.dataPath + "/SaveDataInfo.json", jsonData);

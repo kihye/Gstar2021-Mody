@@ -22,10 +22,14 @@ public class Map_PlayerControl : MonoBehaviour
             tiles.Remove(tiles[i]);
         }
     }
+    private void Awake()
+    {
+        System_MainDataManager.mainData.playerTransform = this.transform;
+        this.transform.position = System_MainDataManager.mainData.playerPos;
+    }
     // Update is called once per frame
     void Update()
     {
-      
         if (Map_DataManager.isCanMove == true)
         {
             var horizontal = Input.GetAxisRaw("Horizontal");
@@ -43,15 +47,20 @@ public class Map_PlayerControl : MonoBehaviour
                 if (nextNode)
                 {
                     this.transform.position = nextNode.transform.position + Vector3.up * 5f;
+                    System_MainDataManager.mainData.playerPos = this.transform.position;
 
                     if (stack.Count == 0 || nextNode != stack.Peek())
                     {
                         Map_DataManager.diceCountSum--;
+
                         stack.Push(node);
+                        System_MainDataManager.mainData.nodeData.Push(node);
                     }
                     else
                     {
                         stack.Pop();
+                        System_MainDataManager.mainData.nodeData.Pop();
+
                         Map_DataManager.diceCountSum++;
                     }
 
@@ -91,6 +100,7 @@ public class Map_PlayerControl : MonoBehaviour
     public void DiceStackClear()
     {
         stack.Clear();
+        System_MainDataManager.mainData.nodeData.Clear();
     }
 
 }

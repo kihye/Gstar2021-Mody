@@ -86,7 +86,7 @@ public class BtnClick : MonoBehaviour
     {
         SoundManager.instance.PlaySFX("Click");
 
-        DataInfo d1 = new DataInfo("두만식", 1000, 2000);
+        DataInfo d1 = new DataInfo(System_MainDataManager.mainData);
         SLManager.instance.SaveData(d1);
     }
 
@@ -94,7 +94,7 @@ public class BtnClick : MonoBehaviour
     {
         SoundManager.instance.PlaySFX("Click");
 
-        DataInfo d2 = new DataInfo("곽두팔", 5000, 75000);
+        DataInfo d2 = new DataInfo(System_MainDataManager.mainData);
         SLManager.instance.SaveData(d2);
     }
 

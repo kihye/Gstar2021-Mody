@@ -13,6 +13,12 @@ public class System_MainDataManager : MonoBehaviour
     public int defPoint;
 
     public int playerMoney;
+    public Stack<Node> nodeData = new Stack<Node>();
+
+    public Transform playerTransform;
+    public Vector3 playerPos;
+
+    public int fieldEnemyData;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,5 +46,13 @@ public class System_MainDataManager : MonoBehaviour
         defPoint = 10;
 
         playerMoney = 0;
+        // 시작 지점
+        playerPos.x = 45;
+        playerPos.y = 5;
+        playerPos.z = -45;
+    }
+    public void PlayerPosSet()
+    {
+
     }
 }
