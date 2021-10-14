@@ -41,7 +41,8 @@ public class BtnClick : MonoBehaviour
                             
                       },
                 () => {
-                            PlayerData.getsetName = UIManager.instance.inputMsg.GetComponent<TMP_Text>().text;
+                            System_MainDataManager.mainData.name = UIManager.instance.inputMsg.GetComponent<TMP_Text>().text;
+                            System_MainDataManager.mainData.StartNewGame();
                             SceneManager.LoadScene("MainMapScene");
                             SoundManager.instance.PlayBGM("B2");
                       },
