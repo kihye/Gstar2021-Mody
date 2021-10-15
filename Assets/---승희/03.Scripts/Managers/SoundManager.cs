@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 
 [System.Serializable]
-public class Sound
+public class Sounds
 {
     public string name;         //사운드 이름
     public AudioClip clip;      //사운드 파일
@@ -19,8 +19,8 @@ public class SoundManager : MonoBehaviour
     public AudioSource[] audioSourceSFX;    //현재 재생 중인 이펙트 사운드
     public AudioSource audioSourceBGM;      //현재 재생 중인 배경 사운드
 
-    public Sound[] sfx;                     //전체 이펙트 사운드
-    public Sound[] bgm;                     //전체 배경 사운드
+    public Sounds[] sfx;                     //전체 이펙트 사운드
+    public Sounds[] bgm;                     //전체 배경 사운드
 
     public string[] playingSFXName;         //현재 재생 중인 이펙트 사운드의 이름
 

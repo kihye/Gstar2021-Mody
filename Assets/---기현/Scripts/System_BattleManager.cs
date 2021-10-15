@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class System_BattleManager : MonoBehaviour
 {
+    public Vector3 cameraPos;
+    public Quaternion cameraRot;
+    public GameObject battleCamera;
+
     public Player_BattleData pData;
     public Enemy_BattleData[] eData = new Enemy_BattleData[4];
     public System_SkillDictionary sDict;
@@ -57,6 +61,17 @@ public class System_BattleManager : MonoBehaviour
     void Update()
     {
         SelectTargetControl();
+    }
+    private void CameraSet()
+    {
+        cameraPos.x = 956.7f;
+        cameraPos.y = 347.5f;
+        cameraPos.z = -144.9f;
+
+        cameraRot.eulerAngles = new Vector3(0, 15.6f, 0);
+
+        battleCamera.transform.position = cameraPos;
+        battleCamera.transform.rotation = cameraRot;
     }
     public void DoAttack(ref int enemyHp, int myDamage)
     {
