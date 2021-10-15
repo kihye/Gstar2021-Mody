@@ -16,7 +16,7 @@ public class Stat : MonoBehaviour
     public int DEF { get { return _def; } set { _def = value; } }
 
     // Start is called before the first frame update
-    private void Start()
+    public void Start()
     {
         _money = 1000000000;
         _atk = 10;

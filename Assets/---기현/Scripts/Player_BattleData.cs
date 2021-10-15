@@ -11,6 +11,7 @@ public class Player_BattleData : BasicStatus
         _defPoint = 10;
 
         _curHp = _maxHp;
+
     }
     public Player_BattleData(int maxHp, int curHp, int atkPoint, int defPoint)
     {
