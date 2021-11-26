@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class UIManager : MonoBehaviour
     public static GameObject OptionSet;
     public static GameObject InventorySet;
 
+    public Camera camera;
 
     //팝업창
     public TMP_Text msg;            //팝업창 본문 내용
@@ -41,7 +43,14 @@ public class UIManager : MonoBehaviour
         InventorySet = GameObject.Find("canvas").transform.GetChild(1).gameObject;  //canvas 오브젝트의 2번째 자식을 찾아서 대입
         PopupSet = GameObject.Find("canvas").transform.GetChild(2).gameObject;      //canvas 오브젝트의 3번째 자식을 찾아서 대입
     }
-
+    private void Update()
+    {
+        if(SceneManager.GetActiveScene().name == "TitleScene")
+        {
+            if(camera == null)
+                camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        }
+    }
     //
     // [ 팝업 ]
     public void SetPopup(string _msg, string _btn1, string _btn2, Action _act1, Action _act2, bool _onInputField = false)      //팝업창에 출력할 정보 설정 및 창 띄우기
@@ -87,11 +96,22 @@ public class UIManager : MonoBehaviour
     // [ 옵션창 ]
     public void OpenOption()        //옵션창 활성화
     {
+        if (SceneManager.GetActiveScene().name == "TitleScene")
+        {
+            camera.GetComponent<GlitchEffect>().enabled = false;
+        }
+        
         OptionSet.SetActive(true);
+        Option.CheckNowScene();
     }
 
     public void CloseOption()       //옵션창 비활성화
     {
+        if (SceneManager.GetActiveScene().name == "TitleScene")
+        {
+            camera.GetComponent<GlitchEffect>().enabled = true;
+        }
+
         OptionSet.SetActive(false);
     }
 

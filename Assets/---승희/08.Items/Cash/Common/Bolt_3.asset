@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed2deb4c8cb9fac4c949d415d1de36ff, type: 3}
   m_Name: Bolt_3
   m_EditorClassIdentifier: 
-  itemName: Bolt_3
+  itemNum: 2
+  itemName: "\uD2BC\uD2BC\uD55C \uBCFC\uD2B8"
   itemType: 0
-  itemSprite: {fileID: 21300000, guid: 8247f5026856c1d48be7a20afccd6b77, type: 3}
+  buffType: 0
+  itemRarity: 0
+  itemSprite: {fileID: 21300000, guid: 14963c95d12627c46bac7fc3581b6bf4, type: 3}
+  dataNum: 0
+  dataTurn: 0
   purchasePrice: 0
   sellPrice: 300000

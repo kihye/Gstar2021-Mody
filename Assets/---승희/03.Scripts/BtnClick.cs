@@ -10,6 +10,8 @@ public class BtnClick : MonoBehaviour
     {
         SoundManager.instance.PlaySFX("Click");
 
+        UIManager.instance.camera.GetComponent<GlitchEffect>().enabled = false;
+
         //저장된 데이터 파일이 존재한다면
         if (SLManager.instance.SearchData() == true)
         {
@@ -38,13 +40,21 @@ public class BtnClick : MonoBehaviour
                 "닫기",
                 "확인",
                 () => {
-                            
+                    if (SceneManager.GetActiveScene().name == "TitleScene")
+                        UIManager.instance.camera.GetComponent<GlitchEffect>().enabled = true;
                       },
                 () => {
-                            System_MainDataManager.mainData.name = UIManager.instance.inputMsg.GetComponent<TMP_Text>().text;
-                            System_MainDataManager.mainData.StartNewGame();
-                            SceneManager.LoadScene("MainMapScene");
-                            SoundManager.instance.PlayBGM("B2");
+                    if(SceneManager.GetActiveScene().name == "TitleScene")
+                    {
+                        System_MainDataManager.mainData.name = UIManager.instance.inputMsg.GetComponent<TMP_Text>().text;
+                        if (System_MainDataManager.mainData.name.Length == 1)
+                        {
+                            System_MainDataManager.mainData.name = "Mody";
+                        }
+                        System_MainDataManager.mainData.StartNewGame();
+                        LoadingSceneManager.LoadScene("MainMapScene");
+                        SoundManager.instance.PlayBGM("B2");
+                    } 
                       },
                 true
             );
@@ -123,7 +133,7 @@ public class BtnClick : MonoBehaviour
         SoundManager.instance.PlaySFX("Click");
 
         UIManager.instance.OpenInven();
-        Debug.Log(PlayerData.getsetName);
+        //Debug.Log(PlayerData.getsetName);
     }
 
     public void CloseInvenBtn()     //주머니(인벤토리) 닫기 버튼

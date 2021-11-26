@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed2deb4c8cb9fac4c949d415d1de36ff, type: 3}
   m_Name: Nut_3
   m_EditorClassIdentifier: 
-  itemName: Nut_3
+  itemNum: 0
+  itemName: "\uD2BC\uD2BC\uD55C \uB108\uD2B8"
   itemType: 0
-  itemSprite: {fileID: 21300000, guid: cf983c0f9ccdb564483811cb1b8e7406, type: 3}
+  buffType: 0
+  itemRarity: 2
+  itemSprite: {fileID: 21300000, guid: 118f37c97b83bb548ab5259ded974080, type: 3}
+  dataNum: 0
+  dataTurn: 0
   purchasePrice: 0
   sellPrice: 500000

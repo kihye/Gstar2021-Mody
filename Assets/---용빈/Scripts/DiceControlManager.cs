@@ -17,6 +17,7 @@ public class DiceControlManager : MonoBehaviour
 
     public static bool isRolled = false;
     public static bool diceChecked = false;
+    public static bool isMoved = false;
 
     private void Awake()
     {
@@ -26,7 +27,7 @@ public class DiceControlManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) && !isMoved)
         {
             if ((!moveDice[0].activeSelf) && (!moveDice[1].activeSelf))
             {
@@ -34,6 +35,7 @@ public class DiceControlManager : MonoBehaviour
                 DiceActive(true);
                 RollDice(moveDice);
                 isRolled = true;
+                isMoved = true;
             }
         }
         if(Map_DataManager.myDiceCount == 1)
@@ -74,7 +76,7 @@ public class DiceControlManager : MonoBehaviour
             float dirZ = Random.Range(0, 500);
 
 
-            moveDice[i].transform.position = startSpot;
+            moveDice[i].transform.localPosition = startSpot;
 
             transform.rotation = Quaternion.identity;
             diceRigid[i].AddForce(transform.up * diceSpeed);

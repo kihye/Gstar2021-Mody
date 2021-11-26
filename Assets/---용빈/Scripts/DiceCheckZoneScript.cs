@@ -91,8 +91,8 @@ public class DiceCheckZoneScript : MonoBehaviour
                     DiceControlManager.diceChecked = true;
                 }
             }
-            Debug.Log(Map_DataManager.diceCount[0]);
-            Debug.Log(Map_DataManager.diceCount[1]);
+            //Debug.Log(Map_DataManager.diceCount[0]);
+            //Debug.Log(Map_DataManager.diceCount[1]);
         }
     }
     private bool diceStayCheck(Vector3[] diceVelocity)

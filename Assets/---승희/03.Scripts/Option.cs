@@ -3,11 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Option : MonoBehaviour
 {
     public static FullScreenMode screenMode;
     public Toggle fullscreenToggle;
+
+    //-- Post Processing On/Off --//
+    public PostProcessProfile ppProfile;    //Post Processing Profile
+    private AmbientOcclusion ambient;
+    private Bloom bloom;
+    private DepthOfField depth;
+    private AutoExposure exposure;
+    private Vignette vignette;
+    private MotionBlur blur;
+
+    public Toggle ambientT;                  //Ambient Occlusion //한 장면의 각 점이 앰비언트 라이팅(광원)에 얼마나 노출되어 있는지를 계산
+    public Toggle bloomT;                    //Bloom             //빛 퍼짐
+    public Toggle depthT;                      //Depth Of Field    //피사계 심도    //거리에 따른 초점 조절
+    public Toggle exposureT;                 //Auto Exposure     //자동 노출      //자동 빛 조절
+    public Toggle vignetteT;                 //Vignette          //비네팅         //외곽부분이 어두워지는 효과
+    public Toggle blurT;                     //Motion Blur       //빠르게 움직이는 물체의 뚜렷한 줄무늬
+
+    //-- 옵션 창에서 포스트 프로세싱 토글들을 인게임 옵션창에서만 띄우기 위함 --//
+    public static GameObject ppTexts;
+    public static GameObject ppToggles;
 
     public TMPro.TMP_Dropdown shadowDropdown;               //TextMesh Pro를 이용한 Dropdown
     List<string> shadowOptions = new List<string>();        //그림자 옵션 문자열을 담을 List
@@ -17,9 +39,31 @@ public class Option : MonoBehaviour
 
     public static int resolutionNum, shadowNum;
 
+    private void Awake()
+    {
+        ppTexts = GameObject.Find("PPs");
+        ppToggles = GameObject.Find("PPsToggles");
+    }
+
     void Start()
     {
         InitOption();
+    }
+
+    //
+    //현재 scene 확인
+    public static void CheckNowScene()
+    {
+        if (SceneManager.GetActiveScene().name == "TitleScene")
+        {
+            ppTexts.SetActive(false);
+            ppToggles.SetActive(false);
+        }
+        else if (SceneManager.GetActiveScene().name == "MainMapScene")
+        {
+            ppTexts.SetActive(true);
+            ppToggles.SetActive(true);
+        }
     }
 
     //
@@ -125,5 +169,115 @@ public class Option : MonoBehaviour
     public void IsFullScreen(bool isFull)
     {
         screenMode = isFull ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
+    }
+
+    //
+    // [ 포스트 프로세싱 효과 ON/OFF ]
+    public void IsAmbient()
+    {
+        ppProfile = GameObject.Find("PostProcessVolume").GetComponent<PostProcessVolume>().profile;
+        ppProfile.TryGetSettings<AmbientOcclusion>(out ambient);
+        //ambient.enabled.value = toggle ? true : false;
+
+        if (ambientT.isOn)
+        {
+            ambient.enabled.value = true;
+        }
+        else
+        {
+            ambient.enabled.value = false;
+        }
+
+        Debug.Log("ambient 효과 : " + ambient.enabled.value);
+    }
+
+    public void IsBloom(bool toggle)
+    {
+        ppProfile = GameObject.Find("PostProcessVolume").GetComponent<PostProcessVolume>().profile;
+        ppProfile.TryGetSettings<Bloom>(out bloom);
+        //bloom.enabled.value = toggle ? true : false;
+
+        if (bloomT.isOn)
+        {
+            bloom.enabled.value = true;
+        }
+        else
+        {
+            bloom.enabled.value = false;
+        }
+
+        Debug.Log("bloom 효과 : " + bloom.enabled.value);
+    }
+
+    public void IsDOF(bool toggle)
+    {
+        ppProfile = GameObject.Find("PostProcessVolume").GetComponent<PostProcessVolume>().profile;
+        ppProfile.TryGetSettings<DepthOfField>(out depth);
+        //depth.enabled.value = toggle ? true : false;
+
+        if (depthT.isOn)
+        {
+            depth.enabled.value = true;
+        }
+        else
+        {
+            depth.enabled.value = false;
+        }
+
+        Debug.Log("depth 효과 : " + depth.enabled.value);
+    }
+
+    public void IsExposure(bool toggle)
+    {
+        ppProfile = GameObject.Find("PostProcessVolume").GetComponent<PostProcessVolume>().profile;
+        ppProfile.TryGetSettings<AutoExposure>(out exposure);
+        //exposure.enabled.value = toggle ? true : false;
+
+        if (exposureT.isOn)
+        {
+            exposure.enabled.value = true;
+        }
+        else
+        {
+            exposure.enabled.value = false;
+        }
+
+        Debug.Log("exposure 효과 : " + exposure.enabled.value);
+    }
+
+    public void IsVignette(bool toggle)
+    {
+        ppProfile = GameObject.Find("PostProcessVolume").GetComponent<PostProcessVolume>().profile;
+        ppProfile.TryGetSettings<Vignette>(out vignette);
+        //vignette.enabled.value = toggle ? true : false;
+
+        if (vignetteT.isOn)
+        {
+            vignette.enabled.value = true;
+        }
+        else
+        {
+            vignette.enabled.value = false;
+        }
+
+        Debug.Log("vignette 효과 : " + vignette.enabled.value);
+    }
+
+    public void IsBlur(bool toggle)
+    {
+        ppProfile = GameObject.Find("PostProcessVolume").GetComponent<PostProcessVolume>().profile;
+        ppProfile.TryGetSettings<MotionBlur>(out blur);
+        //blur.enabled.value = toggle ? true : false;
+
+        if (blurT.isOn)
+        {
+            blur.enabled.value = true;
+        }
+        else
+        {
+            blur.enabled.value = false;
+        }
+
+        Debug.Log("blur 효과 : " + blur.enabled.value);
     }
 }

@@ -13,9 +13,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - ProcessingCamera
+  - Dices
+  - UI_ToolTip
   - 
   - 
   - 
@@ -40,4 +40,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Maps
+    uniqueID: 1580179773
+    locked: 0
+  - name: UI
+    uniqueID: 2399440961
+    locked: 0
+  - name: UI_ToolTip
+    uniqueID: 2760487069
     locked: 0

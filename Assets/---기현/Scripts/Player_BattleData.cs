@@ -7,7 +7,7 @@ public class Player_BattleData : BasicStatus
     public Player_BattleData()
     {
         _maxHp = 200;
-        _atkPoint = 10;
+        _atkPoint = 100;
         _defPoint = 10;
 
         _curHp = _maxHp;

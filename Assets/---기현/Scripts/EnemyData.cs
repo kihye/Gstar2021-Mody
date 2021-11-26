@@ -11,6 +11,14 @@ public class EnemyData : BasicStatus
 
     public int _rewardMoney;
     public string _name;
+    public EnemyData()
+    {
+        _rewardMoney = 500000;      // 500,000
+        _atkPoint = 10;
+        _defPoint = 10;
+        _maxHp = 150;
+        _name = "LW-";
+    }
     public void MakeEnemy(EnemyLevel eLevel, EnemyType eType)
     {
         switch(eLevel)
@@ -39,7 +47,7 @@ public class EnemyData : BasicStatus
         }
         MakeEnemyData(eType);
     }
-    public void MakeEnemyData(EnemyType eType)
+    private void MakeEnemyData(EnemyType eType)
     {
         switch(eType)
         {

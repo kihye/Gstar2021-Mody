@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed2deb4c8cb9fac4c949d415d1de36ff, type: 3}
   m_Name: Washer_2
   m_EditorClassIdentifier: 
-  itemName: Washer_2
+  itemNum: 0
+  itemName: "\uC640\uC154"
   itemType: 0
-  itemSprite: {fileID: 21300000, guid: cf64c8260859a6045acb52aeff366c5e, type: 3}
+  buffType: 0
+  itemRarity: 1
+  itemSprite: {fileID: 21300000, guid: 3806e7ed7456a7b43bdbea88fe680e96, type: 3}
+  dataNum: 0
+  dataTurn: 0
   purchasePrice: 0
   sellPrice: 300000

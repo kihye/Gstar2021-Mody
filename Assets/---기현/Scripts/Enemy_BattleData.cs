@@ -10,6 +10,10 @@ public class Enemy_BattleData : BasicStatus
 
     public enum EnemyAI { Attack, Defense, Buff, Debuff }
     public EnemyAI _enemyAI;
+    public string _enemyName;
+    public int _money;
+
+    public bool _isAttacked;
 
     public Enemy_BattleData()
     {
@@ -21,15 +25,18 @@ public class Enemy_BattleData : BasicStatus
 
         _curHp = _maxHp;
     }
-    public Enemy_BattleData(int[] enemyData)
+    public Enemy_BattleData(EnemyData enemyData)
     {
         isAlive = true;
-        _maxHp = enemyData[0];
-        _atkPoint = enemyData[1];
-        _defPoint = enemyData[2];
+        _isAttacked = false;
+        _maxHp = enemyData._maxHp;
+        _atkPoint = enemyData._atkPoint;
+        _defPoint = enemyData._defPoint;
+        _enemyName = enemyData._name;
+        _money = enemyData._rewardMoney;
         _eTurn = 0;
-
         _curHp = _maxHp;
+        
     }
     public int _targetHp
     {
@@ -50,13 +57,18 @@ public class Enemy_BattleData : BasicStatus
         switch(_enemyAI)
         {
             case EnemyAI.Attack:
-                if(_eTurn > 1)
-                Attack_AI(ref playerHp);
+                if(_eTurn >= 1)
+                {
+                    Attack_AI(ref playerHp);
+                }
                 break;
         }
     }
     public void Attack_AI(ref int playerHp)
     {
-        playerHp = playerHp - _atkPoint;
+        if (playerHp - _atkPoint <= 0)
+            playerHp = 0;
+        else
+            playerHp = playerHp - _atkPoint;
     }
 }

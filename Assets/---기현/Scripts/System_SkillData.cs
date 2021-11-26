@@ -2,27 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillData
+public class System_SkillData
 {
-    public bool _isBuff;
-    public bool _isDeBuff;
-    public bool _isAttack;
-
-    private int _sTargetDiceCount;   // 스킬이 요구하는 주사위 눈금
+    public enum SkillType
+    {
+        _isBuff,
+        _isDeBuff,
+        _isAttack
+    }
+    public enum BuffType
+    {
+        _isHeal,
+        _isDmgBuff,
+        _isDefBuff
+    }
+    public SkillType _type { get; private set; }
+    public BuffType _bType { get; private set; }
 
     public int _sIndex;             // 스킬 인덱스 번호
     public int _sDamage;           // 스킬 데미지
     public int _sHitCount;         // 데미지 스킬의 타격 회수
 
+    public int _skillReadyTime;      // 스킬 준비 쿨타임
+    public int _skillCoolTime;       // 스킬 쿨타임
+    private int _sTargetDiceCount;   // 스킬이 요구하는 주사위 눈금
+
     private string _sName;
     private string _sInfo;
-    public SkillData(int sIndex, int sTargetDiceCount, int sDamage, int sHitCount) // 기본 생성은 공격스킬로
+    public System_SkillData(int sIndex, int sTargetDiceCount, int sDamage, int sHitCount, int skillReadyTime, int skillCoolTime, SkillType type = SkillType._isAttack)
     {
+        _type = type;
+
         _sIndex = sIndex;
         _sTargetDiceCount = sTargetDiceCount;
-        _sDamage = sDamage;
+        _sDamage = SkillDamage(sIndex, sDamage);
         _sHitCount = sHitCount;
-        _isAttack = true;
+
+        _skillReadyTime = skillReadyTime;
+        _skillCoolTime = skillCoolTime;
     }
     /*          
                 주사위 갯수에 따른 스킬 효과 산출 방식
@@ -85,6 +102,26 @@ public class SkillData
         double value = (double)_sDamage;
         value *= CalculateEffectByDice(Mathf.Abs(_sTargetDiceCount - myDiceCount));
         return (int)value;
+    }
+    private int SkillDamage(int sIndex, int sDamage)
+    {
+        int damage = sDamage;
+        switch(sIndex)
+        {
+            case 0:
+                sDamage += sDamage / 2;     // 150%
+                break;
+            case 1:
+                sDamage += sDamage / 5;     // 120%
+                break;
+            case 2:
+                sDamage += sDamage / 2;     // 150%
+                break;
+            case 3:
+                sDamage += sDamage;         // 200%
+                break;
+        }
+        return sDamage;
     }
     public string sName
     {
